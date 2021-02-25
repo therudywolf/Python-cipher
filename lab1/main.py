@@ -120,7 +120,7 @@ def сaesar_decode(text):
     print(full_data) 
 
 def caesar_pr_encode(text):
-    rot = int(input('Введите сдвиг: '))
+    rot = int(input('Значение Сдвига: '))
     new_text = list(text)
     print(new_text)
     for i in new_text:
