@@ -1,7 +1,7 @@
 from re import findall  # метод из модуля для разбиения строки на подстроки
 
 # .,!/{}\'\"
-alpha = tuple("АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ .,!/{}\'\"1234567890")
+alpha = tuple("АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ .,")
 MatrixLength = 3
 MatrixMod = len(alpha)
 MatrixSquare = MatrixLength * MatrixLength
@@ -149,7 +149,3 @@ def encryptDecrypt(mode, message, key):
 
 
 print("Final message:", encryptDecrypt(cryptMode, startMessage, mainKey))
-
-# Эта капуста зеленая, все равно что это зеленая капуста.
-# кряк1273ф
-# СИ6ХР7МЛЪ05З Ч0ГЦЭК'"'ЙЗПЗ00УПЦЮ8ХТНУЗ8 Ч0ГЦЭКВШН/Е0135ЙЙ
