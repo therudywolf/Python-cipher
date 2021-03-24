@@ -48,7 +48,7 @@ def playfer():
         mtx_abt_j.append(mtx_abt_i)
     print(" mtx_abt = {}".format(mtx_abt_j))
     # Поправляем текст
-    if len(text) % 2 == 1:  # Если последняя биграмма состоит из одной буквы, то добавляем букву в конец
+    if len(text) % 2 == 1:
         text = text + "я"
     print(" text = {}".format(text))
     # Шифруем

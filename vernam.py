@@ -56,7 +56,7 @@ def notepad_shenona(msg):
     deshifr_text = "Расшифрованный текст:={}".format(deciphered_str)
 
     return open_text, kluchick, shifr, deshifr_code, deshifr_text
-"""
+
 msg = input("Введите текст: \n")
 otvet = notepad_shenona(msg)
 print(otvet[0])
@@ -64,4 +64,3 @@ print(otvet[1])
 print(otvet[2])
 print(otvet[3])
 print(otvet[4])
-"""
