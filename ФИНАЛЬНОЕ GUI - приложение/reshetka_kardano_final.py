@@ -1,5 +1,6 @@
 import random
 
+
 def reshetka_kardano(SIZE, text):
     matrix_number = 1
     # SIZE = int(input(" Введите размер матрицы (одно число): "))  # вводим размер матрицы XxY
@@ -19,7 +20,8 @@ def reshetka_kardano(SIZE, text):
     bin_matrix = [[0 for x in range(SIZE)] for y in range(SIZE)]
     for i in range(SIZE):
         for j in range(SIZE):
-            bin_matrix[i][j] = random.randint(0, 1)   # рандомизируем ячейки матрицы, либо 1, либо 0
+            # рандомизируем ячейки матрицы, либо 1, либо 0
+            bin_matrix[i][j] = random.randint(0, 1)
             """
             while True:
                 bin_matrix[i][j] = int(input(" bin_matrix[{}][{}] = ".format(i, j)))  # вводим значения пустоты/наполнения
@@ -28,7 +30,8 @@ def reshetka_kardano(SIZE, text):
                 else:
                     break"""
     # формируем матрицу с текстом
-    text_matrix = [[[0 for x in range(SIZE)] for y in range(SIZE)] for matrix in range(matrix_number)]
+    text_matrix = [[[0 for x in range(SIZE)] for y in range(
+        SIZE)] for matrix in range(matrix_number)]
     counter_text = 0  # счётчик позиции символа в тексте
     for i in range(matrix_number):
         for j in range(SIZE):
@@ -63,7 +66,8 @@ def reshetka_kardano(SIZE, text):
     encrypted_text = str((" {}\n".format(enc_text)))
     # расшифрование
     # формируем матрицу с текстом
-    text_matrix = [[[0 for x in range(SIZE)] for y in range(SIZE)] for matrix in range(matrix_number)]
+    text_matrix = [[[0 for x in range(SIZE)] for y in range(
+        SIZE)] for matrix in range(matrix_number)]
     counter_text = 0  # счётчик позиции символа в тексте
     for i in range(matrix_number):
         for j in range(SIZE):
@@ -94,7 +98,10 @@ def reshetka_kardano(SIZE, text):
                     open_text = open_text + text_matrix[z][i][j]
     decrypted_text = str(" {}\n".format(open_text_))
     return encrypted_text, decrypted_text
-"""size = int(input(" Введите размер матрицы (одно число): "))  # вводим размер матрицы XxY
+
+
+# вводим размер матрицы XxY
+size = int(input(" Введите размер матрицы (одно число): "))
 text = input(" Введите текст: ")  # вводим текст
 otvet = reshetka_kardano(size, text)
-print(otvet[0], otvet[1])"""
+print(otvet[0], otvet[1])
