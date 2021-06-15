@@ -1,6 +1,4 @@
 import random
-
-
 def GOST_34_10_94_realisation(msg):
     final_otvet = ""
     final_check = ""
@@ -79,16 +77,14 @@ def GOST_34_10_94_realisation(msg):
     alpha_code_msg = list()
     for i in range(len(msg_list)):
         alpha_code_msg.append(int(alphavit.get(msg_list[i])))
-    final_otvet += "Длина исходного сообщения {} символов".format(
-        len(alpha_code_msg)) + '\n'
+    final_otvet += "Длина исходного сообщения {} символов".format(len(alpha_code_msg)) + '\n'
     hash_code_msg = hash_value(p, alpha_code_msg)
     final_otvet += "Хэш сообщения:= {}".format(hash_code_msg) + '\n'
     # print()
 
     s = (x * r + k * hash_code_msg) % q
 
-    final_otvet += "Цифровая подпись = " + \
-        str(r % (2 ** 256)) + "," + str(s % (2 ** 256)) + '\n'
+    final_otvet += "Цифровая подпись = " + str(r % (2 ** 256)) + "," + str(s % (2 ** 256)) + '\n'
 
     #  Проверка цифровой подписи
     v = (hash_code_msg ** (q - 2)) % q
@@ -104,7 +100,6 @@ def GOST_34_10_94_realisation(msg):
         final_check += str(r) + " = " + str(u) + '\n'
         final_check += "Подпись неверна"
     return final_otvet, final_check
-
 
 '''msg = input("Введите сообщение: ")  # .lower()
 otvet = GOST_34_10_94_realisation(msg)
