@@ -1,6 +1,7 @@
-from re import findall # метод из модуля для разбиения строки на подстроки
+from re import findall  # метод из модуля для разбиения строки на подстроки
 
-alpha = tuple("АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ .,!/{}\'\"1234567890") # .,!/{}\'\"
+# .,!/{}\'\"
+alpha = tuple("АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ .,!/{}\'\"1234567890")
 MatrixLength = 3
 MatrixMod = len(alpha)
 MatrixSquare = MatrixLength * MatrixLength
@@ -9,20 +10,26 @@ MatrixSquare = MatrixLength * MatrixLength
 # Проверка условий на ошибки
 def checkErrors(key):
     if len(key) != MatrixSquare:
-        return "Error: Длина ключа не равна длине квадрата матрицы!!!"    # "len(key) != %d" % MatrixSquare
+        # "len(key) != %d" % MatrixSquare
+        return "Error: Длина ключа не равна длине квадрата матрицы!!!"
     elif not getDeter(sliceto(key)):
         return "Error: Определитель матрицы равен 0!!!"
     elif not getDeter(sliceto(key)) % MatrixMod:
-        return "Error: Определитель матрицы mod длина алфавита = 0"  # det(Key) mod len(alpha) = 0
+        # det(Key) mod len(alpha) = 0
+        return "Error: Определитель матрицы mod длина алфавита = 0"
     else:
         return None
 
 # Регулярное выражение - 3 символа сообщения
+
+
 def regular(text):
     template = r".{%d}" % MatrixLength
     return findall(template, text)
 
 # Кодирование символов в матрице
+
+
 def encode(matrix):
     for x in range(len(matrix)):
         for y in range(MatrixLength):
@@ -30,7 +37,9 @@ def encode(matrix):
     return matrix
 
 # Декодирование чисел в матрице + шифрование/расшифрование
-def decode(matrixM, matrixK, message = ""):
+
+
+def decode(matrixM, matrixK, message=""):
     matrixF = []
     for z in range(len(matrixM)):
         temp = [0 for _ in range(MatrixLength)]
@@ -44,6 +53,8 @@ def decode(matrixM, matrixK, message = ""):
     return message
 
 # Создаёт матрицу по три символа
+
+
 def sliceto(text):
     matrix = []
     for three in regular(text):
@@ -51,12 +62,16 @@ def sliceto(text):
     return encode(matrix)
 
 # Нахождение обратного определителя матрицы
+
+
 def iDet(det):
     for num in range(MatrixMod):
         if num * det % MatrixMod == 1:
             return num
 
 # Алгебраические дополнения
+
+
 def algebratic(x, y, det):
     matrix = sliceto(mainKey)
     matrix.remove(matrix[x])
@@ -66,17 +81,21 @@ def algebratic(x, y, det):
     return (pow(-1, x + y) * det2x2 * iDet(det)) % MatrixMod
 
 # Получение определителя матрицы
+
+
 def getDeter(matrix):
     return \
-    (matrix[0][0] * matrix[1][1] * matrix[2][2]) + \
-    (matrix[0][1] * matrix[1][2] * matrix[2][0]) + \
-    (matrix[1][0] * matrix[2][1] * matrix[0][2]) - \
-    (matrix[0][2] * matrix[1][1] * matrix[2][0]) - \
-    (matrix[0][1] * matrix[1][0] * matrix[2][2]) - \
-    (matrix[1][2] * matrix[2][1] * matrix[0][0])
+        (matrix[0][0] * matrix[1][1] * matrix[2][2]) + \
+        (matrix[0][1] * matrix[1][2] * matrix[2][0]) + \
+        (matrix[1][0] * matrix[2][1] * matrix[0][2]) - \
+        (matrix[0][2] * matrix[1][1] * matrix[2][0]) - \
+        (matrix[0][1] * matrix[1][0] * matrix[2][2]) - \
+        (matrix[1][2] * matrix[2][1] * matrix[0][0])
 
 # Получение алгебраических дополнений
-def getAlgbr(det, index = 0):
+
+
+def getAlgbr(det, index=0):
     algbrs = [0 for _ in range(MatrixSquare)]
     for string in range(MatrixLength):
         for column in range(MatrixLength):
@@ -85,16 +104,18 @@ def getAlgbr(det, index = 0):
     return algbrs
 
 # Получение обратной матрицы
+
+
 def getIMatr(algbr):
     return [
-        [algbr[0],algbr[3],algbr[6]],
-        [algbr[1],algbr[4],algbr[7]],
-        [algbr[2],algbr[5],algbr[8]]
+        [algbr[0], algbr[3], algbr[6]],
+        [algbr[1], algbr[4], algbr[7]],
+        [algbr[2], algbr[5], algbr[8]]
     ]
 
 
-
-cryptMode = input("Что будем делать? Введите цифру\n 1) Зашифровать\n 2) Расшифровать\n").upper()
+cryptMode = input(
+    "Что будем делать? Введите цифру\n 1) Зашифровать\n 2) Расшифровать\n").upper()
 if cryptMode not in ['1', '2']:
     print("Error: mode is not Found")
     raise SystemExit
@@ -114,6 +135,8 @@ while len(startMessage) % MatrixLength != 0:
     startMessage += startMessage[-1]
 
 # Основная функция
+
+
 def encryptDecrypt(mode, message, key):
     MatrixMessage = sliceto(message)
     MatrixKey = sliceto(key)
@@ -123,6 +146,8 @@ def encryptDecrypt(mode, message, key):
         algbr = getAlgbr(getDeter(MatrixKey))
         final = decode(MatrixMessage, getIMatr(algbr))
     return final
+
+
 print("Final message:", encryptDecrypt(cryptMode, startMessage, mainKey))
 
 # Эта капуста зеленая, все равно что это зеленая капуста.

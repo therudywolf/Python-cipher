@@ -1,5 +1,6 @@
 import random
 
+
 def RSA_realisation(msg):
     final_otvet = ""
     final_check = ""
@@ -39,23 +40,24 @@ def RSA_realisation(msg):
         raise SystemExit
 
     # array2.append("...")
-    final_otvet += "Подходящие для открытой экспоненты числа(D): " + str(array2) + "\n"
+    final_otvet += "Подходящие для открытой экспоненты числа(D): " + str(
+        array2) + "\n"
 
     # Открытая экспонента
-    D = int(random.choice(array2))  # Простое нечётное число не имеющее общих делителей с f(n)
+    # Простое нечётное число не имеющее общих делителей с f(n)
+    D = int(random.choice(array2))
 
     final_otvet += "Открытая экспонента (D) =" + str(D) + '\n'
 
-    """
     # Подбор натурального числа k #
     array3 = []
     for k in range(1, 1000):
         heh = int((1 + k * Fn) / D)
         if heh * D == 1 + k * Fn:
             array3.append(k)
-    #array3.append("...")
+    # array3.append("...")
     # print("k:", array3)
-    """
+
     k = 2
 
     # Секретная экспонента
@@ -89,28 +91,30 @@ def RSA_realisation(msg):
                 'Ю': 65, 'Я': 66, '!': 67, "?": 68, ";": 69}
 
     # Сообщение
-    """
+
     m = 0
     message = input("Введите сообщение: ")
 
     for krya in message:
         m += int(alf.find(krya))
     print("Сообщение (m): ", m)
-    """
+
     # хэшируем сообщение
     # msg = input("Введите сообщение: ")
     msg_list = list(msg)
     alpha_code_msg = list()
     for i in range(len(msg_list)):
         alpha_code_msg.append(int(alphavit.get(msg_list[i])))
-    final_otvet += "Длина исходного сообщения {} символов".format(len(alpha_code_msg)) + '\n'
+    final_otvet += "Длина исходного сообщения {} символов".format(
+        len(alpha_code_msg)) + '\n'
     # print()
 
     def hash_value(n, alpha_code):
         i = 0
         hashing_value = 1
         while i < len(alpha_code_msg):
-            hashing_value = (((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % n
+            hashing_value = (
+                ((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % n
             i += 1
         return hashing_value
 
@@ -134,7 +138,3 @@ def RSA_realisation(msg):
         final_check += str(m) + ' != ' + str(Dm) + '\n'
         final_check += "Подпись не верна!" + '\n'
     return final_otvet, final_check
-"""
-msg = input("Введите сообщение: ")
-otvet = RSA_realisation(msg)
-print(otvet[0], '\n', otvet[1])"""

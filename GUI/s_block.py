@@ -10,11 +10,11 @@ SBlocks = [[12, 4, 6, 2, 10, 5, 11, 9, 14, 8, 13, 7, 0, 3, 15, 1],
 
 alphavite = '0123456789abcdef'
 
-text = input('Введите открытый текст: \n').encode('utf-8') #Ввод сообщения
-code = '' #Зашифрованное сообщение
+text = input('Введите открытый текст: \n').encode('utf-8')  # Ввод сообщения
+code = ''  # Зашифрованное сообщение
 krya = 0
 
-#print(text.hex())
+# print(text.hex())
 for i in text.hex():
     code += alphavite[SBlocks[krya][alphavite.find(i)]]
 

@@ -1,5 +1,7 @@
 from ec import DSGOST
 import random
+
+
 def GOST_34_10_2012_realisation(msg):
     # инициализация алфавита
     alphabet_lower = {'а': 0, 'б': 1, 'в': 2, 'г': 3, 'д': 4,
@@ -14,7 +16,8 @@ def GOST_34_10_2012_realisation(msg):
         i = 0
         hashing_value = 1
         while i < len(alpha_code_msg):
-            hashing_value = (((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % p
+            hashing_value = (
+                ((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % p
             i += 1
         return hashing_value
 
@@ -47,7 +50,6 @@ def GOST_34_10_2012_realisation(msg):
         public_key = int(public_key_16x, 16)
         final_otvet += "Открытый ключ:" + str(public_key) + '\n'
         final_otvet += "(" + str(sign[0]) + "," + str(sign[1]) + ")" + '\n'
-
 
     def test_gost_verify(msg):
         global final_check

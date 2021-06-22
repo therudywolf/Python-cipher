@@ -8,7 +8,8 @@ def playfer():
                        'ь', 'ы', 'э', 'ю', 'я']
 
     text = input(" Введите текст: ").lower()  # Вводим текст
-    key = input(" Введите ключ (без повторяющихся символов): ").lower()  # Вводим ключ
+    # Вводим ключ
+    key = input(" Введите ключ (без повторяющихся символов): ").lower()
 
     for krya in text:
         if krya == ',':
@@ -26,7 +27,8 @@ def playfer():
     for i in range(len(alphavite_lower)):
         bool_buff = False  # Буфер для проверки вхождения символа в алфавит ниже
         for j in range(len(key)):
-            if alphavite_lower[i] == key[j]:   # Если находим вхождение символа алфавита в ключ, то прерываем цикл и
+            # Если находим вхождение символа алфавита в ключ, то прерываем цикл и
+            if alphavite_lower[i] == key[j]:
                 # переходим к другому символу
                 bool_buff = True
                 break
@@ -40,7 +42,8 @@ def playfer():
     for j in range(5):
         mtx_abt_i = []  # Заготовка под матричный алфавит по i в j
         for i in range(6):
-            mtx_abt_i.append(new_alphabet[counter])  # Добавляем букву в матрицу
+            # Добавляем букву в матрицу
+            mtx_abt_i.append(new_alphabet[counter])
             counter = counter + 1
         mtx_abt_j.append(mtx_abt_i)
     print(" mtx_abt = {}".format(mtx_abt_j))
@@ -68,7 +71,9 @@ def playfer():
                                 if mtx_abt_j[j_2][i_2] == text[t + 1]:
                                     # Если буквы по диагонали
                                     if j_1 != j_2 and i_1 != i_2:
-                                        enc_text = enc_text + mtx_abt_j[j_1][i_2] + mtx_abt_j[j_2][i_1]
+                                        enc_text = enc_text + \
+                                            mtx_abt_j[j_1][i_2] + \
+                                            mtx_abt_j[j_2][i_1]
                                     # Если буквы на одной строке
                                     elif j_1 == j_2 and i_1 != i_2:
                                         enc_text = enc_text + mtx_abt_j[j_1][(i_1 + 1) % 6] + mtx_abt_j[j_2][
@@ -79,8 +84,11 @@ def playfer():
                                             i_2]  # %5 для предотвращения выхода за столбец
                                     # Если буквы совпадают
                                     elif j_1 == j_2 and i_1 == i_2:
-                                        enc_text = enc_text + mtx_abt_j[j_1][i_1] + mtx_abt_j[j_1][i_1]
-                                    print(" {}{} -> {}{}".format(text[t], text[t + 1], enc_text[t], enc_text[t + 1]))
+                                        enc_text = enc_text + \
+                                            mtx_abt_j[j_1][i_1] + \
+                                            mtx_abt_j[j_1][i_1]
+                                    print(
+                                        " {}{} -> {}{}".format(text[t], text[t + 1], enc_text[t], enc_text[t + 1]))
                                     flag = False
                                     break
         print(" text = {}".format(enc_text))
@@ -102,7 +110,9 @@ def playfer():
                                 if mtx_abt_j[j_2][i_2] == text[t + 1]:
                                     # Если буквы по диагонали
                                     if j_1 != j_2 and i_1 != i_2:
-                                        enc_text = enc_text + mtx_abt_j[j_1][i_2] + mtx_abt_j[j_2][i_1]
+                                        enc_text = enc_text + \
+                                            mtx_abt_j[j_1][i_2] + \
+                                            mtx_abt_j[j_2][i_1]
                                     # Если буквы на одной строке
                                     elif j_1 == j_2 and i_1 != i_2:
                                         enc_text = enc_text + mtx_abt_j[j_1][(i_1 - 1) % 6] + mtx_abt_j[j_2][
@@ -113,8 +123,11 @@ def playfer():
                                             i_2]  # %5 для предотвращения выхода за столбец
                                     # Если буквы совпадают
                                     elif j_1 == j_2 and i_1 == i_2:
-                                        enc_text = enc_text + mtx_abt_j[j_1][i_1] + mtx_abt_j[j_1][i_1]
-                                    print(" {}{} -> {}{}".format(text[t], text[t + 1], enc_text[t], enc_text[t + 1]))
+                                        enc_text = enc_text + \
+                                            mtx_abt_j[j_1][i_1] + \
+                                            mtx_abt_j[j_1][i_1]
+                                    print(
+                                        " {}{} -> {}{}".format(text[t], text[t + 1], enc_text[t], enc_text[t + 1]))
                                     flag = False
                                     break
         print(" text = {}".format(enc_text))
@@ -127,4 +140,3 @@ playfer()
 # Эта капуста зеленая, все равно что это зеленая капуста.
 
 # шцбрбочмхкижнгоябелцюидябкоптупыхлижнгояарбочмхкутра
-

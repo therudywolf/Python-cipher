@@ -1,4 +1,6 @@
 import random
+
+
 def a5_realisation(s):
     alph = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюя.,-?!: "
 
@@ -148,7 +150,8 @@ def a5_realisation(s):
             dva[j + i * 64] = dva[j + i * 64] ^ sh[j]
             encrypt_dv_code += str(dva[j + i * 64])
 
-    shifr_text_x2 = "Зашифрованный текст (в двоичном виде):\n" + encrypt_dv_code
+    shifr_text_x2 = "Зашифрованный текст (в двоичном виде):\n" + \
+        encrypt_dv_code
 
     # Расишфровываем текст в двоичном коде
     decrypt_dv_code = ""
@@ -158,7 +161,8 @@ def a5_realisation(s):
             dva[j + i * 64] = dva[j + i * 64] ^ sh[j]
             decrypt_dv_code += str(dva[j + i * 64])
 
-    deshifr_text_x2 = "Расшифрованный текст (в двоичном виде):\n" + decrypt_dv_code
+    deshifr_text_x2 = "Расшифрованный текст (в двоичном виде):\n" + \
+        decrypt_dv_code
 
     # Переводи расшифрованный двоичный код в текст
     decrypt = ""
@@ -186,6 +190,8 @@ def a5_realisation(s):
     a5_decrypt = "Расшифрованный текст:\n" + decrypt
 
     return x2_code_text, gen_key, gen_gamma, shifr_text_x2, deshifr_text_x2, a5_decrypt
+
+
 """
 s = input("Введите сообщение:\n")  # ввод сообщения
 otvet = a5_realisation(s)

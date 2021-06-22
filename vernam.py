@@ -1,5 +1,6 @@
 import random
 
+
 def notepad_shenona(msg):
     alphavit = {'а': 0, 'б': 1, 'в': 2, 'г': 3, 'д': 4,
                 'е': 5, 'ж': 6, 'з': 7, 'и': 8, 'й': 9,
@@ -56,6 +57,7 @@ def notepad_shenona(msg):
     deshifr_text = "Расшифрованный текст:={}".format(deciphered_str)
 
     return open_text, kluchick, shifr, deshifr_code, deshifr_text
+
 
 msg = input("Введите текст: \n")
 otvet = notepad_shenona(msg)

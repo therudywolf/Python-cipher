@@ -1,5 +1,6 @@
 import random
 
+
 class ECPoint:
     def __init__(self, x=0, y=0, a=0, b=0, p=0, is_polynomial_basis=False):
         self.x = x
@@ -31,15 +32,18 @@ class ECPoint:
                 x_sqr = self.mult_field(self.x, self.x, self.p)
                 p_result.x = self.sum_field(x_sqr,
                                             self.mult_field(self.b, self.inv_field(x_sqr, self.p), self.p))
-                tmp1 = self.mult_field(self.y, self.inv_field(self.x, self.p), self.p)
-                tmp2 = self.mult_field(self.sum_field(self.x, tmp1), p_result.x, self.p)
+                tmp1 = self.mult_field(
+                    self.y, self.inv_field(self.x, self.p), self.p)
+                tmp2 = self.mult_field(self.sum_field(
+                    self.x, tmp1), p_result.x, self.p)
                 p_result.y = self.sum_field(x_sqr, tmp2, p_result.x)
             else:
                 if self.x == other.x:
                     return float('inf')
                 l = self.mult_field(self.sum_field(self.y, other.y),
                                     self.inv_field(self.sum_field(self.x, other.x), self.p), self.p)
-                p_result.x = self.sum_field(self.mult_field(l, l, self.p), l, self.x, other.x, self.a)
+                p_result.x = self.sum_field(self.mult_field(
+                    l, l, self.p), l, self.x, other.x, self.a)
                 l2 = self.mult_field(self.sum_field(self.y, other.y),
                                      self.inv_field(self.sum_field(self.x, other.x), self.p), self.p)
                 p_result.y = self.sum_field(self.mult_field(l2, self.sum_field(self.x, p_result.x), self.p),
@@ -48,7 +52,8 @@ class ECPoint:
             dx = (other.x - self.x) % self.p
             dy = (other.y - self.y) % self.p
             if self.x == other.x and self.y == other.y:
-                l = ((3 * self.x ** 2 + self.a) * ECPoint._mod_inverse(2 * self.y, self.p)) % self.p
+                l = ((3 * self.x ** 2 + self.a) *
+                     ECPoint._mod_inverse(2 * self.y, self.p)) % self.p
             else:
                 if self.x == other.x:
                     return float('inf')
@@ -60,7 +65,8 @@ class ECPoint:
 
     # умножение EC точки и целого числа
     def __rmul__(self, other):
-        p_result = ECPoint(self.x, self.y, self.a, self.b, self.p, self.pol_basis)
+        p_result = ECPoint(self.x, self.y, self.a,
+                           self.b, self.p, self.pol_basis)
         temp = ECPoint(self.x, self.y, self.a, self.b, self.p, self.pol_basis)
         x = other - 1
         while x != 0:
@@ -106,6 +112,7 @@ class ECPoint:
             g1 = self.sum_field(g1, (g2 << j))
         return g1
 
+
 class DSGOST:
     # p - int, EC-модуль
     # a, b - int, коэффициенты EC
@@ -120,6 +127,7 @@ class DSGOST:
     # sing message
     # message - int
     # private_key - int
+
     def sign(self, message, private_key, k=0):
         e = message % self.q
         if e == 0:
@@ -149,7 +157,7 @@ class DSGOST:
         c_point = z1 * self.p_point + z2 * sign[2]
         #print("c_point=", c_point)
         u = c_point.x % self.q
-        #print(r)
+        # print(r)
         if u == sign[0]:
             # print(u, "=", sign[0])
             return u, True

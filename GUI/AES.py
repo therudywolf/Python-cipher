@@ -1,3 +1,5 @@
+import os
+import time
 nb = 4  # номер колонки of State (for AES = 4)
 nr = 10  # кол-во раундов в цикле шифрования (if nb = 4 nr = 10)
 nk = 4  # the key length (in 32-bit words)
@@ -47,7 +49,7 @@ rcon = [[0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36],
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00],
         [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-]
+        ]
 
 
 def encrypt(input_bytes, key):
@@ -190,15 +192,23 @@ def mix_columns(state, inv=False):
     for i in range(nb):
 
         if inv == False:  # encryption
-            s0 = mul_by_02(state[0][i]) ^ mul_by_03(state[1][i]) ^ state[2][i] ^ state[3][i]
-            s1 = state[0][i] ^ mul_by_02(state[1][i]) ^ mul_by_03(state[2][i]) ^ state[3][i]
-            s2 = state[0][i] ^ state[1][i] ^ mul_by_02(state[2][i]) ^ mul_by_03(state[3][i])
-            s3 = mul_by_03(state[0][i]) ^ state[1][i] ^ state[2][i] ^ mul_by_02(state[3][i])
+            s0 = mul_by_02(state[0][i]) ^ mul_by_03(
+                state[1][i]) ^ state[2][i] ^ state[3][i]
+            s1 = state[0][i] ^ mul_by_02(state[1][i]) ^ mul_by_03(
+                state[2][i]) ^ state[3][i]
+            s2 = state[0][i] ^ state[1][i] ^ mul_by_02(
+                state[2][i]) ^ mul_by_03(state[3][i])
+            s3 = mul_by_03(state[0][i]) ^ state[1][i] ^ state[2][i] ^ mul_by_02(
+                state[3][i])
         else:  # decryption
-            s0 = mul_by_0e(state[0][i]) ^ mul_by_0b(state[1][i]) ^ mul_by_0d(state[2][i]) ^ mul_by_09(state[3][i])
-            s1 = mul_by_09(state[0][i]) ^ mul_by_0e(state[1][i]) ^ mul_by_0b(state[2][i]) ^ mul_by_0d(state[3][i])
-            s2 = mul_by_0d(state[0][i]) ^ mul_by_09(state[1][i]) ^ mul_by_0e(state[2][i]) ^ mul_by_0b(state[3][i])
-            s3 = mul_by_0b(state[0][i]) ^ mul_by_0d(state[1][i]) ^ mul_by_09(state[2][i]) ^ mul_by_0e(state[3][i])
+            s0 = mul_by_0e(state[0][i]) ^ mul_by_0b(state[1][i]) ^ mul_by_0d(
+                state[2][i]) ^ mul_by_09(state[3][i])
+            s1 = mul_by_09(state[0][i]) ^ mul_by_0e(state[1][i]) ^ mul_by_0b(
+                state[2][i]) ^ mul_by_0d(state[3][i])
+            s2 = mul_by_0d(state[0][i]) ^ mul_by_09(state[1][i]) ^ mul_by_0e(
+                state[2][i]) ^ mul_by_0b(state[3][i])
+            s3 = mul_by_0b(state[0][i]) ^ mul_by_0d(state[1][i]) ^ mul_by_09(
+                state[2][i]) ^ mul_by_0e(state[3][i])
 
         state[0][i] = s0
         state[1][i] = s1
@@ -243,7 +253,8 @@ def key_expansion(key):
 
             # и, наконец, сделать XOR из 3 столбцов
             for row in range(4):
-                s = (key_schedule[row][col - 4]) ^ (tmp[row]) ^ (rcon[row][int(col / nk - 1)])
+                s = (key_schedule[row][col - 4]) ^ (tmp[row]
+                                                    ) ^ (rcon[row][int(col / nk - 1)])
                 key_schedule[row].append(s)
 
         else:
@@ -337,8 +348,7 @@ def mul_by_0e(num):
 
 # Конец небольшого блока полезных функций
 
-import os
-import time
+
 def AES_realize(way, key):
     input_path = os.path.abspath("file.txt")
     while True:
@@ -382,7 +392,8 @@ def AES_realize(way, key):
                 crypted_part = encrypt(temp, key)
                 crypted_data.extend(crypted_part)
 
-        out_path = os.path.join(os.path.dirname(input_path), 'crypted_' + os.path.basename(input_path))
+        out_path = os.path.join(os.path.dirname(
+            input_path), 'crypted_' + os.path.basename(input_path))
 
         # Output data
         with open(out_path, 'xb') as ff:
@@ -412,7 +423,8 @@ def AES_realize(way, key):
                 temp.append(1)
                 decrypted_part = encrypt(temp, key)
 
-        out_path = os.path.join(os.path.dirname(input_path2), 'decrypted_' + os.path.basename(input_path2))
+        out_path = os.path.join(os.path.dirname(
+            input_path2), 'decrypted_' + os.path.basename(input_path2))
 
         # Output data
         with open(out_path, 'xb') as ff:

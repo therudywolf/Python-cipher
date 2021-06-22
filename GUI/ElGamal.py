@@ -1,6 +1,7 @@
 from math import gcd
 import random
 
+
 def ElGamal_realisation(msg):
     final_EL_otvet = ""
     final_EL_check = ""
@@ -56,34 +57,37 @@ def ElGamal_realisation(msg):
 
     p = gen_prime(10)
     final_EL_otvet += "P =" + str(p) + '\n'
-    #print()
+    # print()
     g = random.randint(2, p - 1)
     final_EL_otvet += "G =" + str(g) + '\n'
-    #print()
+    # print()
     # отправитель выбирает случайное целое число X,1<x<(p-1)
     x = random.randint(2, p - 2)
     y = (g ** x) % p
-    final_EL_otvet += "Открытый ключ(Y)={}\nСекретный ключ(X)={}".format(y, x) + '\n'
-    #print()
+    final_EL_otvet += "Открытый ключ(Y)={}\nСекретный ключ(X)={}".format(
+        y, x) + '\n'
+    # print()
     # хэшируем сообщение
     msg_list = list(msg)
     alpha_code_msg = list()
     for i in range(len(msg_list)):
         alpha_code_msg.append(int(alphavit.get(msg_list[i])))
-    final_EL_otvet += "Длина исходного сообщения {} символов".format(len(alpha_code_msg)) + '\n'
-    #print()
+    final_EL_otvet += "Длина исходного сообщения {} символов".format(
+        len(alpha_code_msg)) + '\n'
+    # print()
 
     def hash_value(p, alpha_code):
         i = 0
         hashing_value = 1
         while i < len(alpha_code_msg):
-            hashing_value = (((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % p
+            hashing_value = (
+                ((hashing_value - 1) + int(alpha_code_msg[i])) ** 2) % p
             i += 1
         return hashing_value
 
     hash_code_msg = hash_value(p, alpha_code_msg)
     final_EL_otvet += "Хэш сообщения:= {}".format(hash_code_msg) + '\n'
-    #print()
+    # print()
     # генерация случайное целое число K
     k = 1
     while True:
@@ -115,8 +119,8 @@ def ElGamal_realisation(msg):
         final_EL_check += str(a_1) + " != " + str(a_2) + '\n'
         final_EL_check += "Подпись неверна"
     return final_EL_otvet, final_EL_check
-    
+
+
 """msg = input("Введите сообщение:")
 otvet = ElGamal_realisation(msg)
 print(otvet[0], '\n' + otvet[1])"""
-
